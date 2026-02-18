@@ -114,6 +114,7 @@ return {
 				svelte = {},
 				csharp_ls = {},
 				lua_ls = {},
+				prismals = {},
 				emmet_language_server = {},
 				sqls = {
 					cmd = {

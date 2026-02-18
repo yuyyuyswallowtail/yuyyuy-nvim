@@ -35,6 +35,7 @@ return {
 				"scss",
 				"typst",
 				"sql",
+				"prisma",
 			},
 			highlight = {
 				enable = true,

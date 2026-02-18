@@ -13,6 +13,7 @@ vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.termguicolors = true
+vim.opt.swapfile = false
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 vim.o.clipboard = "unnamedplus"
