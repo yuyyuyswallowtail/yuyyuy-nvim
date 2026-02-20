@@ -1,86 +1,86 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		"mfussenegger/nvim-lint",
-		"rshkarin/mason-nvim-lint",
-		"stevearc/conform.nvim",
-		"zapling/mason-conform.nvim",
-		opts = {
-			ensure_installed = {
-				"stylua",
-				"shfmt",
-				"shellcheck",
-				"black",
-				"isort",
-				"pyright",
-				"rust-analyzer",
-				"gopls",
-				"goimports",
-				"typescript-language-server",
-				"eslint_d",
-				"prettierd",
-				"tailwindcss-language-server",
-				"css-lsp",
-				"html-lsp",
-				"vue-language-server",
-				"svelte-language-server",
-				"csharp-language-server",
-				"netcoredbg",
-				"jdtls",
-				"markdownlint",
-				"sqls",
-			},
-		},
 		config = function()
-			require("mason-nvim-lint").setup()
-			require("mason-conform").setup()
+			require("mason").setup()
 		end,
 	},
 	{
 		"mason-org/mason-lspconfig.nvim",
-		opts = {},
 		dependencies = {
-			{ "mason-org/mason.nvim", opts = {} },
+			"mason-org/mason.nvim",
 			"neovim/nvim-lspconfig",
 		},
 		config = function()
-			require("mason-lspconfig").setup()
+			require("mason-lspconfig").setup({
+				automatic_installation = true,
+				ensure_installed = {
+					"rust_analyzer",
+					"gopls",
+					"tailwindcss",
+					"cssls",
+					"html",
+					"svelte",
+					"csharp_ls",
+					"jdtls",
+					"sqls",
+					"pyright",
+					"vtsls",
+					"emmet_language_server",
+					"prismals",
+				},
+			})
 		end,
 	},
 	{
 		"stevearc/conform.nvim",
-		opts = {
-			formatters_by_ft = {
-				lua = { "stylua" },
-				python = { "isort", "black" },
-				javascript = { "prettierd" },
-				typescript = { "prettierd" },
-				javascriptreact = { "prettierd" },
-				typescriptreact = { "prettierd" },
-				json = { "prettierd" },
-				go = { "goimports", "gofmt" },
-				rust = { "rustfmt" },
-				markdown = { "prettierd" },
-				bash = { "shfmt" },
-				sql = { "sqlfluff" },
-			},
-			formatters = {
-				sqlfluff = {
-					command = "sqlfluff",
-					args = { "fix", "-" },
-					stdin = true,
-					exit_codes = { 0, 1 },
-					timeout_ms = 5000,
-				},
-			},
+		dependencies = {
+			"zapling/mason-conform.nvim",
 		},
+		config = function()
+			require("mason-conform").setup({
+				ensure_installed = {
+					"stylua",
+					"isort",
+					"black",
+					"prettierd",
+					"goimports",
+					"gofmt",
+					"shfmt",
+				},
+			})
+			require("conform").setup({
+				formatters_by_ft = {
+					lua = { "stylua" },
+					python = { "isort", "black" },
+					javascript = { "prettierd" },
+					typescript = { "prettierd" },
+					javascriptreact = { "prettierd" },
+					typescriptreact = { "prettierd" },
+					json = { "prettierd" },
+					go = { "goimports", "gofmt" },
+					rust = { "rustfmt" },
+					markdown = { "prettierd" },
+					bash = { "shfmt" },
+				},
+			})
+		end,
 	},
 	{
 		"mfussenegger/nvim-lint",
+		dependencies = {
+			"rshkarin/mason-nvim-lint",
+		},
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
+			require("mason-nvim-lint").setup({
+				ensure_installed = {
+					"flake8",
+					"eslint_d",
+					"markdownlint",
+				},
+			})
 			local lint = require("lint")
-
 			lint.linters_by_ft = {
 				python = { "flake8" },
 				json = { "eslint_d" },
@@ -90,7 +90,6 @@ return {
 				typescriptreact = { "eslint_d" },
 				markdown = { "markdownlint" },
 				bash = { "shellcheck" },
-				sql = { "sqlfluff" },
 			}
 			vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost" }, {
 				callback = function()
@@ -114,12 +113,8 @@ return {
 			})
 			local dap, dapui = require("dap"), require("dapui")
 			local dapgo = require("dap-go")
-
-			-- 1. Setup the UI
 			dapui.setup()
 			dapgo.setup()
-
-			-- 2. Attach listeners to auto-open/close the UI
 			dap.listeners.before.attach.dapui_config = function()
 				dapui.open()
 			end
@@ -132,13 +127,9 @@ return {
 			dap.listeners.before.event_exited.dapui_config = function()
 				dapui.close()
 			end
-
 			vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
 			vim.fn.sign_define("DapStopped", { text = "▶️", texthl = "", linehl = "", numhl = "" })
-
 			vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
-
-			-- Essential DAP Controls
 			vim.keymap.set("n", "<leader>dc", function()
 				require("dap").continue()
 			end, { desc = "Debug: Start/Continue" })
@@ -151,8 +142,6 @@ return {
 			vim.keymap.set("n", "<leader>du", function()
 				require("dap").step_out()
 			end, { desc = "Debug: Step Out" })
-
-			-- UI Specific Keymaps
 			vim.keymap.set("n", "<leader>dt", function()
 				dapui.toggle()
 			end, { desc = "Debug: Toggle UI" })

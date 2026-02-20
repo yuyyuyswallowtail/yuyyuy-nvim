@@ -128,7 +128,7 @@ Plugin manager setup using **lazy.nvim** for:
 2. Clone this repository:
 
    ```bash
-   git clone <your-repo-url> ~/.config/nvim
+   git clone https://github.com/yuyyuyswallowtail/yuyyuy-nvim.git ~/.config/nvim
    ```
 
 3. Open Neovim:
