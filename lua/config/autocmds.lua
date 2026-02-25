@@ -30,3 +30,36 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		})
 	end,
 })
+
+local function source_matugen()
+	local matugen_path = os.getenv("HOME") .. "/.config/nvim/matugen.lua" -- dofile doesn't expand $HOME or ~
+
+	local file, err = io.open(matugen_path, "r")
+	if err ~= nil then
+		vim.cmd("colorscheme base16-catppuccin-mocha")
+
+		vim.print(
+			"A matugen style file was not found, but that's okay! The colorscheme will dynamically change if matugen runs!"
+		)
+	else
+		dofile(matugen_path)
+		io.close(file)
+	end
+end
+
+local function auxiliary_function()
+	source_matugen()
+
+	dofile(os.getenv("HOME") .. "/.config/nvim/lua/config/plugins/lualine.lua")
+
+	vim.api.nvim_set_hl(0, "Comment", { italic = true })
+end
+
+vim.api.nvim_create_autocmd("Signal", {
+	pattern = "SIGUSR1",
+	callback = auxiliary_function,
+})
+
+vim.cmd("colorscheme matugen")
+
+vim.api.nvim_command("autocmd ColorScheme * highlight Normal ctermbg=None guibg=None")

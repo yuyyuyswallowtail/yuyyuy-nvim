@@ -14,6 +14,9 @@ return {
 		},
 	},
 	{
+		"RRethy/base16-nvim",
+	},
+	{
 		"kevinhwang91/nvim-ufo",
 		dependencies = {
 			"kevinhwang91/promise-async",
@@ -61,6 +64,7 @@ return {
 		config = function()
 			require("notify").setup({
 				render = "compact",
+				background_colour = "#000000",
 			})
 			vim.notify = require("notify")
 		end,

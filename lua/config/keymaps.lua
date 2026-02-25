@@ -1,7 +1,7 @@
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set({ "n", "x" }, "x", '"_x')
 
-vim.keymap.set("n", "<leader><Esc>", function()
+vim.keymap.set("n", "<leader><delete>", function()
 	local config_path = vim.fn.stdpath("config") .. "/init.lua"
 	vim.cmd("edit " .. config_path)
 end, { desc = "Edit Neovim Configuration" })
@@ -59,3 +59,19 @@ vim.keymap.set("n", "<C-A-Left>", "<C-w>H", { desc = "Move Window Left" })
 vim.keymap.set("n", "<C-A-Down>", "<C-w>J", { desc = "Move Window Down" })
 vim.keymap.set("n", "<C-A-Up>", "<C-w>K", { desc = "Move Window Up" })
 vim.keymap.set("n", "<C-A-Right>", "<C-w>L", { desc = "Move Window Right" })
+
+local map = vim.keymap.set
+
+-- Normal mode
+map("n", "<Find>", "0")
+map("n", "<Select>", "$")
+
+-- Insert mode
+map("i", "<Find>", "<C-o>0")
+map("i", "<Select>", "<C-o>$")
+
+-- Visual / Select mode
+map("v", "<Find>", "0")
+map("v", "<Select>", "$")
+map("s", "<Find>", "0")
+map("s", "<Select>", "$")

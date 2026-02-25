@@ -21,6 +21,8 @@ return {
 					"snippet_backward",
 					"fallback",
 				},
+				["<Up>"] = false,
+				["<Down>"] = false,
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 				["<C-e>"] = { "hide" },
 				["<C-u>"] = { "scroll_documentation_up", "fallback" },
@@ -33,7 +35,7 @@ return {
 					list = {
 						selection = {
 							preselect = false,
-							auto_insert = true,
+							auto_insert = false,
 						},
 					},
 					menu = { auto_show = true },
