@@ -4,22 +4,22 @@
 -- RRethy/nvim-base16 requires "#rrggbb" format → use hex (NOT hex_stripped)
 
 require("base16-colorscheme").setup({
-	base00 = "#1a1110",
-	base01 = "#140c0b",
-	base02 = "#231918",
-	base03 = "#534341",
-	base04 = "#d8c2be",
-	base05 = "#f1dfdc",
-	base06 = "#392e2c",
-	base07 = "#423735",
-	base08 = "#dec48c",
-	base09 = "#dec48c",
-	base0A = "#e7bdb6",
-	base0B = "#ffb4a8",
-	base0C = "#564419",
-	base0D = "#73342a",
-	base0E = "#5d3f3a",
-	base0F = "#e7bdb6",
+	base00 = "#111318",
+	base01 = "#0c0e13",
+	base02 = "#191c20",
+	base03 = "#43474e",
+	base04 = "#c4c6cf",
+	base05 = "#e1e2e9",
+	base06 = "#2e3035",
+	base07 = "#37393e",
+	base08 = "#dbbde2",
+	base09 = "#dbbde2",
+	base0A = "#bdc7dc",
+	base0B = "#a7c8ff",
+	base0C = "#553e5d",
+	base0D = "#244777",
+	base0E = "#3d4758",
+	base0F = "#bdc7dc",
 })
 
 -- ── Transparent Background ────────────────────────────────────────────────────
@@ -60,29 +60,29 @@ set_hl_multiple(transparent_groups, { bg = "NONE", ctermbg = "NONE" })
 -- ── Custom Highlight Overrides ────────────────────────────────────────────────
 -- Make selected text stand out more
 vim.api.nvim_set_hl(0, "Visual", {
-	bg = "#73342a",
-	fg = "#ffdad4",
+	bg = "#244777",
+	fg = "#d5e3ff",
 })
 
 -- Strings
 set_hl_multiple({ "String", "TSString", "@string" }, {
-	fg = "#dec48c",
+	fg = "#dbbde2",
 })
 
 -- Comments
 set_hl_multiple({ "TSComment", "Comment", "@comment" }, {
-	fg = "#a08c89",
+	fg = "#8e9199",
 	italic = true,
 })
 
 -- Methods
 set_hl_multiple({ "TSMethod", "Method", "@function.method", "@function.method.call" }, {
-	fg = "#dec48c",
+	fg = "#dbbde2",
 })
 
 -- Functions
 set_hl_multiple({ "TSFunction", "Function", "@function", "@function.call" }, {
-	fg = "#e7bdb6",
+	fg = "#bdc7dc",
 })
 
 -- Keywords
@@ -97,17 +97,17 @@ set_hl_multiple({
 	"@keyword.conditional",
 	"@keyword.repeat",
 }, {
-	fg = "#904b40",
+	fg = "#3e5f90",
 	italic = true,
 })
 
 -- Float border visible on transparent bg
 vim.api.nvim_set_hl(0, "FloatBorder", {
-	fg = "#a08c89",
+	fg = "#8e9199",
 	bg = "NONE",
 })
 
 -- Cursor line subtle on transparent
 vim.api.nvim_set_hl(0, "CursorLine", {
-	bg = "#231918",
+	bg = "#191c20",
 })

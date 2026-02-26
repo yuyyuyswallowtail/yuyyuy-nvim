@@ -35,7 +35,7 @@ return {
 					list = {
 						selection = {
 							preselect = false,
-							auto_insert = false,
+							auto_insert = true,
 						},
 					},
 					menu = { auto_show = true },
@@ -60,7 +60,7 @@ return {
 				list = {
 					selection = {
 						preselect = false,
-						auto_insert = true,
+						auto_insert = false,
 					},
 				},
 				documentation = { auto_show = false },
